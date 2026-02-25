@@ -1,6 +1,6 @@
 "use client";
 
-import { List } from "@/lib/generated/prisma";
+import { List } from "@/generated/prisma";
 import {
   Popover,
   PopoverContent,
@@ -27,7 +27,7 @@ export const ListOptions = ({ data, onAddCard }: Props) => {
 
   const { execute: executeDelete } = useAction(deleteList, {
     onSuccess: (data) => {
-      toast.success(`List "${data.title}" deleted.`);
+      toast.success(`Список "${data.title}" удалён.`);
       closeRef.current?.click();
     },
     onError: (error) => {
@@ -36,7 +36,7 @@ export const ListOptions = ({ data, onAddCard }: Props) => {
   });
   const { execute: executeCopy } = useAction(copyList, {
     onSuccess: (data) => {
-      toast.success(`List "${data.title}" copied.`);
+      toast.success(`Список "${data.title}" скопирован.`);
       closeRef.current?.click();
     },
     onError: (error) => {
@@ -65,7 +65,7 @@ export const ListOptions = ({ data, onAddCard }: Props) => {
       </PopoverTrigger>
       <PopoverContent className="px-0 pt-3 pb-3" side="bottom" align="start">
         <div className="text-sm font-medium text-center text-neutral-600">
-          List actions
+          Действия со списком
         </div>
         <PopoverClose ref={closeRef}>
           <Button
@@ -80,7 +80,7 @@ export const ListOptions = ({ data, onAddCard }: Props) => {
           className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
           variant={"ghost"}
         >
-          Add card...
+          Добавить карточку...
         </Button>
         <form action={onCopy}>
           <input hidden name="id" id="id" value={data.id} />
@@ -89,7 +89,7 @@ export const ListOptions = ({ data, onAddCard }: Props) => {
             variant="ghost"
             className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
           >
-            Copy list...
+            Копировать список...
           </FormSubmit>
         </form>
         <Separator />
@@ -100,7 +100,7 @@ export const ListOptions = ({ data, onAddCard }: Props) => {
             variant="ghost"
             className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
           >
-            Delete this list
+            Удалить этот список
           </FormSubmit>
         </form>
       </PopoverContent>

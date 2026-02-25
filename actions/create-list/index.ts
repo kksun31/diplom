@@ -15,7 +15,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   if (!userId || !orgId) {
     return {
-      error: "Unauthorized",
+      error: "Неавторизовано",
     };
   }
 
@@ -33,7 +33,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
     if (!board) {
       return {
-        error: "Board not found",
+        error: "Доска не найдена",
       };
     }
 
@@ -62,7 +62,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
   } catch (error) {
     return {
-      error: "Failed to create.",
+      error: "Не удалось создать.",
     };
   }
 

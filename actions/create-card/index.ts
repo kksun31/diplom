@@ -15,7 +15,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   if (!userId || !orgId) {
     return {
-      error: "Unauthorized",
+      error: "Неавторизовано",
     };
   }
 
@@ -35,7 +35,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
     if (!list) {
       return {
-        error: "List not found",
+        error: "Список не найден",
       };
     }
 
@@ -65,7 +65,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
   } catch (error) {
     return {
-      error: "Failed to create.",
+      error: "Не удалось создать.",
     };
   }
 

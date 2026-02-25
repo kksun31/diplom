@@ -9,10 +9,10 @@ export const Navbar = () => {
         <Logo />
         <div className="space-x-4 md:block md:w-auto flex items-center justify-center w-full">
           <Button size="sm" variant={"outline"} asChild>
-            <Link href={"/sign-in"}>Login</Link>
+            <Link href={"/sign-in"}>Войти</Link>
           </Button>
           <Button size={"sm"} asChild>
-            <Link href={"/sign-up"}>Get Taskify for free</Link>
+            <Link href={"/sign-up"}>Получить Tasky бесплатно</Link>
           </Button>
         </div>
       </div>

@@ -2,8 +2,18 @@
 
 import { ActivityItem } from "@/components/activity-item";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AuditLog } from "@/lib/generated/prisma";
+import { AuditLog } from "@/generated/prisma/client";
 import { ActivityIcon } from "lucide-react";
+import { copyCard } from "@/actions/copy-card";
+import { deleteCard } from "@/actions/delete-card";
+import { Button } from "@/components/ui/button";
+import { useAction } from "@/hooks/use-action";
+import { useCardModal } from "@/hooks/use-card-modal";
+import { CardWithList } from "@/types";
+import { Copy, Trash } from "lucide-react";
+import { useParams } from "next/navigation";
+import { toast } from "sonner";
+
 
 interface Props {
   items: AuditLog[];
@@ -14,7 +24,7 @@ export const Activity = ({ items }: Props) => {
     <div className="flex items-start gap-x-3 w-full">
       <ActivityIcon className="h-5 w-5 mt-0.5 text-neutral-700" />
       <div className="w-full">
-        <p className="font-semibold text-neutral-700 mb-2">Activity</p>
+        <p className="font-semibold text-neutral-700 mb-2">Активность</p>
         <ol className="mt-2 space-y-4">
           {items.map((item) => (
             <ActivityItem key={item.id} data={item} />

@@ -15,7 +15,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   if (!userId || !orgId) {
     return {
-      error: "Unauthorized",
+      error: "Неавторизовано",
     };
   }
 
@@ -36,7 +36,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
 
     if (!listToCopy) {
-      return { error: "List not found" };
+      return { error: "Список не найден" };
     }
 
     const lastList = await db.list.findFirst({
@@ -77,7 +77,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
   } catch (error) {
     return {
-      error: "Failed to copy.",
+      error: "Не удалось скопировать.",
     };
   }
 

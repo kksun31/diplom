@@ -16,7 +16,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   if (!userId || !orgId) {
     return {
-      error: "Unauthorized",
+      error: "Неавторизовано",
     };
   }
 
@@ -40,7 +40,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
   } catch (error) {
     return {
-      error: "Failed to delete.",
+      error: "Не удалось удалить.",
     };
   }
 

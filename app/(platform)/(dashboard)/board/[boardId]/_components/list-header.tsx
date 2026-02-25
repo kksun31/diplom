@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, ElementRef } from "react";
-import { List } from "@/lib/generated/prisma";
+import { List } from "@/generated/prisma";
 import { useEventListener } from "usehooks-ts";
 import { FormInput } from "@/components/form/form-input";
 import { useAction } from "@/hooks/use-action";
@@ -41,7 +41,7 @@ export const ListHeader = ({ data, onAddCard }: Props) => {
 
   const { execute } = useAction(updateList, {
     onSuccess: (data) => {
-      toast.success(`Renamed to "${data.title}`);
+      toast.success(`Список переименован в "${data.title}"`);
       setTitle(data.title);
       disableEditing();
     },
@@ -79,7 +79,7 @@ export const ListHeader = ({ data, onAddCard }: Props) => {
             ref={inputRef}
             onBlur={onBlur}
             id="title"
-            placeholder="Enter list title..."
+            placeholder="Введите название списка..."
             defaultValue={title}
             className="text-sm px-[7px] py-1 h-7 font-medium border-transparent hover:border-input focus:border-input transition truncate bg-transparent focus:bg-white"
           />

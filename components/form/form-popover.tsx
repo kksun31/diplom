@@ -30,9 +30,15 @@ type Props = {
   children: React.ReactNode;
   side?: "top" | "right" | "bottom" | "left";
   sideOffset?: number;
+  align?: "start" | "center" | "end";
 };
 
-export function FormPopover({ children, side = "bottom", sideOffset = 8 }: Props) {
+export function FormPopover({
+  children,
+  side = "bottom",
+  sideOffset = 8,
+  align = "center",
+}: Props) {
   const [title, setTitle] = React.useState("");
   const [images, setImages] = React.useState<PexelsImageItem[]>([]);
   const [selected, setSelected] = React.useState<PexelsImageItem | null>(null);
@@ -113,7 +119,12 @@ export function FormPopover({ children, side = "bottom", sideOffset = 8 }: Props
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
 
-      <PopoverContent side={side} sideOffset={sideOffset} className="w-80">
+      <PopoverContent
+        side={side}
+        sideOffset={sideOffset}
+        align={align}
+        className="w-80"
+      >
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="text-sm font-semibold text-neutral-700">

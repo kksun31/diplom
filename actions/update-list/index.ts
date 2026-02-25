@@ -7,14 +7,14 @@ import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { UpdateList } from "./schema";
 import { createAuditLog } from "@/lib/create-audit-log";
-import { ACTION, ENTITY_TYPE } from "@/lib/generated/prisma";
+import { ACTION, ENTITY_TYPE } from "@/generated/prisma";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = await auth();
 
   if (!userId || !orgId) {
     return {
-      error: "Unauthorized",
+      error: "Неавторизовано",
     };
   }
 
@@ -44,7 +44,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
   } catch (error) {
     return {
-      error: "Failed to update.",
+      error: "Не удалось обновить.",
     };
   }
 

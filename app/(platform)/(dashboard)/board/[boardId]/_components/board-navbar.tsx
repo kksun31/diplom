@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { Board } from "@/lib/generated/prisma";
+import { Board } from "@/generated/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { BoardTitleForm } from "./board-title-form";
 import { BoardOptions } from "./board-options";

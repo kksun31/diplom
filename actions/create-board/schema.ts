@@ -1,13 +1,14 @@
+// actions/create-board/schema.ts
 import { z } from "zod";
 
 export const CreateBoard = z.object({
   title: z
-    .string({
-      error: (iss) =>
-        iss.input === undefined ? "Field is required" : "Invalid input.",
-    })
-    .min(3, {
-      message: "Title is too short",
-    }),
-  image: z.string("image is required"),
+    .string()
+    .min(3, "Минимум 3 символа")
+    .max(60, "Максимум 60 символов"),
+  /**
+   * В проекте Antonio это обычно строка формата:
+   * "id|thumbUrl|fullUrl|linkHtml|authorName"
+   */
+  image: z.string().min(1, "Выберите обложку"),
 });

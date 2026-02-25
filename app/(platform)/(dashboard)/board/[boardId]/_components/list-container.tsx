@@ -15,7 +15,7 @@ interface Props {
   boardId: string;
 }
 
-function reorder<T>(list: T[], startIndex: number, endIndex: number) {
+function reorder<T>(list: T[], startIndex: number, endIndex: number): T[] {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
@@ -27,16 +27,17 @@ export const ListContainer = ({ data, boardId }: Props) => {
   const [orderedData, setOrderedData] = useState(data);
 
   const { execute: executeUpdateListOrder } = useAction(updateListOrder, {
-    onSuccess: (data) => {
-      toast.success("List reordered");
+    onSuccess: () => {
+      toast.success("Списки переупорядочены");
     },
     onError: (error) => {
       toast.error(error);
     },
   });
+
   const { execute: executeUpdateCardOrder } = useAction(updateCardOrder, {
     onSuccess: () => {
-      toast.success("Card reordered");
+      toast.success("Карточки переупорядочены");
     },
     onError: (error) => {
       toast.error(error);
@@ -54,7 +55,7 @@ export const ListContainer = ({ data, boardId }: Props) => {
       return;
     }
 
-    // if dropped in the same position
+    // Если бросили на то же самое место
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -62,21 +63,20 @@ export const ListContainer = ({ data, boardId }: Props) => {
       return;
     }
 
-    // User moves a list
+    // Перемещение колонки (списка)
     if (type === "list") {
       const items = reorder(orderedData, source.index, destination.index).map(
-        (item, index) => ({ ...item, order: index })
+        (item: any, index: number) => ({ ...item, order: index })
       );
 
-      setOrderedData(items);
-      executeUpdateListOrder({ items, boardId });
+      setOrderedData(items as any[]);
+      executeUpdateListOrder({ items: items as any[], boardId });
     }
 
-    // User moves a card
+    // Перемещение карточки (задачи)
     if (type === "card") {
       let newOrderedData = [...orderedData];
 
-      // Source and destication list
       const sourceList = newOrderedData.find(
         (list) => list.id === source.droppableId
       );
@@ -88,59 +88,52 @@ export const ListContainer = ({ data, boardId }: Props) => {
         return;
       }
 
-      // Check if cards exists on the sourceList
+      // Гарантируем, что массивы существуют
       if (!sourceList.cards) {
         sourceList.cards = [];
       }
-
-      // CHeck if cards exists on th destList
       if (!destList.cards) {
         destList.cards = [];
       }
 
-      // Moving the card in the same list
+      // 1. Перемещение карточки внутри ОДНОГО списка
       if (source.droppableId === destination.droppableId) {
         const reorderedCards = reorder(
           sourceList.cards,
           source.index,
           destination.index
-        );
+        ) as any[]; // Явно указываем as any[]
 
-        reorderedCards.forEach((card, idx) => {
+        reorderedCards.forEach((card: any, idx: number) => {
           card.order = idx;
         });
 
         sourceList.cards = reorderedCards;
-
         setOrderedData(newOrderedData);
+        
         executeUpdateCardOrder({
           boardId: boardId,
           items: reorderedCards,
         });
-        // User moves the card to anoter list
       } else {
-        // Remove card from the source list
+        // 2. Перемещение карточки в ДРУГОЙ список
         const [movedCard] = sourceList.cards.splice(source.index, 1);
-
-        // Assign the new listId to moved card
         movedCard.listId = destination.droppableId;
-
-        // Add card to the destination list
         destList.cards.splice(destination.index, 0, movedCard);
 
-        sourceList.cards.forEach((card, idx) => {
+        sourceList.cards.forEach((card: any, idx: number) => {
           card.order = idx;
         });
 
-        // Update the order for each card in the destination list
-        destList.cards.forEach((card, idx) => {
+        destList.cards.forEach((card: any, idx: number) => {
           card.order = idx;
         });
 
         setOrderedData(newOrderedData);
+        
         executeUpdateCardOrder({
           boardId: boardId,
-          items: destList.cards,
+          items: destList.cards as any[], // Явно указываем as any[]
         });
       }
     }
