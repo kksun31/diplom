@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.15.0",
+    "@clerk/localizations": "^3.37.0",
+    "@clerk/nextjs": "^6.38.2",
     "@hello-pangea/dnd": "^18.0.1",
     "@prisma/adapter-pg": "^7.4.1",
     "@prisma/client": "^7.4.1",

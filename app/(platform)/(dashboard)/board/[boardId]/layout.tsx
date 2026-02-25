@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { BoardNavbar } from "./_components/board-navbar";
 
 export async function generateMetadata({
@@ -49,7 +49,7 @@ export default async function BoardIdLayout({
   });
 
   if (!board) {
-    notFound();
+    redirect(`/organization/${orgId}`);
   }
 
   return (

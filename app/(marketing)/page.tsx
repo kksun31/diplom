@@ -18,10 +18,10 @@ const MarketingPage = () => {
           No1 менеджер задач
         </div>
         <h1 className="text-3xl md:text-6xl text-center text-neutral-800 mb-6">
-          Tasky помогает командам двигаться
+          Tasky поможет двигаться дальше
         </h1>
         <div className="text-3xl md:text-6xl bg-gradient-to-r from-fuchsia-600 to-pink-600 text-white px-4 p-2 rounded-md pb-4 w-fit">
-          вперёд в работе.
+          Работайте с удобством.
         </div>
       </div>
       <div
@@ -35,7 +35,7 @@ const MarketingPage = () => {
         уникальна. Делайте всё это с Tasky.
       </div>
       <Button className="mt-6" size="lg" asChild>
-        <Link href={"/sign-up"}>Получить Tasky бесплатно</Link>
+        <Link href={"/sign-up"}>Попробовать Tasky</Link>
       </Button>
     </div>
   );
