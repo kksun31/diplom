@@ -1,37 +1,40 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isPublicRoute = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
+const isPublicRoute = createRouteMatcher([
+  "/",            // главная публичная
+  "/sign-in(.*)", // сделай публичным, иначе будет цикл
+  "/sign-up(.*)",
+]);
 
 export default clerkMiddleware(async (auth, req) => {
-  const { userId, orgId, redirectToSignIn } = await auth();
+  const { userId, orgId } = await auth();
+
+  // 1) Если пользователь залогинен и попал на публичную страницу (например "/") — перекинуть
   if (userId && isPublicRoute(req)) {
-    let path = "/select-org";
-
-    if (orgId) {
-      path = `/organization/${orgId}`;
-    }
-
-    const orgSelection = new URL(path, req.url);
-    return NextResponse.redirect(orgSelection);
-    // await auth.protect();
+    const path = orgId ? `/organization/${orgId}` : "/select-org";
+    return NextResponse.redirect(new URL(path, req.url));
   }
 
+  // 2) Если не залогинен и маршрут НЕ публичный — редирект на /sign-in
   if (!userId && !isPublicRoute(req)) {
-    return redirectToSignIn({ returnBackUrl: req.url });
+    const signInUrl = new URL("/sign-in", req.url);
+    signInUrl.searchParams.set("redirect_url", req.url); // Clerk понимает это
+    return NextResponse.redirect(signInUrl);
   }
 
+  // 3) Если залогинен, но org не выбран — на /select-org
   if (userId && !orgId && req.nextUrl.pathname !== "/select-org") {
-    const orgSelection = new URL("/select-org", req.url);
-    return NextResponse.redirect(orgSelection);
+    return NextResponse.redirect(new URL("/select-org", req.url));
   }
+
+  return NextResponse.next();
 });
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
+    "/((?!.*\\..*|_next).*)",
+    "/",
     "/(api|trpc)(.*)",
   ],
 };

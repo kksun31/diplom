@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { ENTITY_TYPE } from "@/lib/generated/prisma";
+import { ENTITY_TYPE } from "@/generated/prisma/enums";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 

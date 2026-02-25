@@ -6,8 +6,8 @@ import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { UpdateCard } from "./schema";
-import { createAuditLog } from "@/lib/create-audit-log";
-import { ACTION, ENTITY_TYPE } from "@/lib/generated/prisma";
+import { ACTION } from "@/generated/prisma/enums";
+import { ENTITY_TYPE } from "@/generated/prisma/enums";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = await auth();
@@ -54,3 +54,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 };
 
 export const updateCard = createSafeAction(UpdateCard, handler);
+function createAuditLog(arg0: { entityTitle: any; entityId: any; entityType: "CARD"; action: "UPDATE"; }) {
+  throw new Error("Function not implemented.");
+}
+
