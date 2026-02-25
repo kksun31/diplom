@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { DeleteList } from "./schema";
 import { createAuditLog } from "@/lib/create-audit-log";
-import { ACTION, ENTITY_TYPE } from "@/lib/generated/prisma";
+import { ACTION, ENTITY_TYPE } from "@/generated/prisma";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = await auth();

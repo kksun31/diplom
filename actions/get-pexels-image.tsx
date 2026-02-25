@@ -1,5 +1,9 @@
 "use server";
+import { getPexelsImages as getImages } from "@/lib/pexels";
 
+export const getImage = async (count: number) => {
+  return await getImages(count);
+};
 type PexelsPhoto = {
   id: number;
   url: string;

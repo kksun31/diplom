@@ -21,23 +21,26 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   const { title, image } = data;
 
-  const [imageId, imageThumbUrl, imageFullUrl, imageLinkHTML, imageUserName] =
-    image.split("|");
+  // Логирование строки image
+  console.log("Image Data:", image);
 
-  if (
-    !imageId ||
-    !imageThumbUrl ||
-    !imageFullUrl ||
-    !imageUserName ||
-    !imageLinkHTML
-  ) {
+  // Проверка на правильный формат строки image
+  const imageParts = image.split("|");
+  if (imageParts.length !== 5) {
     return {
-      error: "Missing fields. Failedt to create book.",
+      error: "Invalid image format. Please provide all required fields.",
+    };
+  }
+
+  const [imageId, imageThumbUrl, imageFullUrl, imageLinkHTML, imageUserName] = imageParts;
+
+  if (!imageId || !imageThumbUrl || !imageFullUrl || !imageUserName || !imageLinkHTML) {
+    return {
+      error: "Missing fields. Failed to create board.",
     };
   }
 
   let board;
-
   try {
     board = await db.board.create({
       data: {
@@ -58,6 +61,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       action: ACTION.CREATE,
     });
   } catch (error) {
+    console.error("Error creating board:", error);
     return {
       error: "Failed to create.",
     };
