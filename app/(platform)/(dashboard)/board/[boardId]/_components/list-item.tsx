@@ -50,7 +50,7 @@ export const ListItem = ({ data, index }: Props) => {
                     data.cards.length > 0 ? "mt-2" : "mt-0"
                   )}
                 >
-                  {data.cards.map((card, index) => (
+                  {data.cards.map((card: { createdAt: Date; id: string; title: string; updatedAt: Date; order: number; description: string | null; listId: string; }, index: number) => (
                     <CardItem index={index} key={card.id} data={card} />
                   ))}
                   {provided.placeholder}

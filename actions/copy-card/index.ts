@@ -15,7 +15,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   if (!userId || !orgId) {
     return {
-      error: "Неавторизовано",
+      error: "Не авторизовано",
     };
   }
 
