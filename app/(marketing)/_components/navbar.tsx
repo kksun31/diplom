@@ -12,7 +12,7 @@ export const Navbar = () => {
             <Link href={"/sign-in"}>Войти</Link>
           </Button>
           <Button size={"sm"} asChild>
-            <Link href={"/sign-up"}>Получить Tasky бесплатно</Link>
+            <Link href={"/sign-up"}>Получить Фокус бесплатно</Link>
           </Button>
         </div>
       </div>
