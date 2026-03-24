@@ -53,7 +53,7 @@ export const Description = ({ data }: Props) => {
       queryClient.invalidateQueries({
         queryKey: ["card-log", data.id],
       });
-      toast.success(`Card "${data.title}" updated`);
+      toast.success(`Карточка "${data.title}" обновлена`);
       disableEditing();
     },
     onError: (error) => {
@@ -76,25 +76,25 @@ export const Description = ({ data }: Props) => {
     <div className="flex items-start gap-x-3 w-full">
       <AlignLeft className="h-5 w-5 mt-0.5 text-neutral-700" />
       <div className="w-full">
-        <p className="font-semibold text-neutral-700 mb-2">Description</p>
+        <p className="font-semibold text-neutral-700 mb-2">Описание</p>
         {isEditing ? (
           <form action={onSubmit} ref={formRef} className="space-y-2">
             <FormTextarea
               id="description"
               className="w-full mt-2"
-              placeholder="Add a more detailed description"
+              placeholder="Добавьте более подробное описание"
               defaultValue={data.description || undefined}
               errors={fieldErrors}
             />
             <div className="flex items-center gap-x-2">
-              <FormSubmit>Save</FormSubmit>
+              <FormSubmit>Сохранить</FormSubmit>
               <Button
                 type="button"
                 onClick={disableEditing}
                 size={"sm"}
                 variant={"ghost"}
               >
-                Cancel
+                Отмена
               </Button>
             </div>
           </form>

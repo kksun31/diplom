@@ -18,7 +18,7 @@ export const ListItem = ({ data, index }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const disableEditing = () => {
-    setIsEditing(true);
+    setIsEditing(false);
   };
 
   const enableEditing = () => {

@@ -36,7 +36,7 @@ export const BoardOptions = ({ id }: Props) => {
       </PopoverTrigger>
       <PopoverContent className="px-0 pt-3 pb-3" side="bottom" align="start">
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
-          Board actions
+          Настройки доски
         </div>
         <PopoverClose asChild>
           <Button
@@ -52,7 +52,7 @@ export const BoardOptions = ({ id }: Props) => {
           disabled={isLoading}
           className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
         >
-          Delete board
+          Удалить доску
         </Button>
       </PopoverContent>
     </Popover>

@@ -184,7 +184,7 @@ export function FormPopover({
                     >
                       <Image
                         src={img.thumbUrl}
-                        alt="Board cover"
+                        alt="Обложка доски"
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 33vw, 200px"

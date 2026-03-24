@@ -2,6 +2,7 @@ import { AuditLog } from "@/generated/prisma";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { generateLogMessage } from "@/lib/generate-log-message";
 import { format } from "date-fns";
+import { ru } from "date-fns/locale";
 
 interface Props {
   data: AuditLog;
@@ -21,7 +22,9 @@ export const ActivityItem = ({ data }: Props) => {
           {generateLogMessage(data)}
         </p>
         <p className="text-xs text-muted-foreground">
-          {format(new Date(data.createdAt), "MMM d, yyyy 'at' h:mm a")}
+          {format(new Date(data.createdAt), "d MMM yyyy 'в' HH:mm", {
+            locale: ru,
+          })}
         </p>
       </div>
     </li>

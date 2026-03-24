@@ -70,12 +70,12 @@ export const CardForm = forwardRef<HTMLTextAreaElement, Props>(
             id="title"
             onKeyDown={onTextareaKeyDown}
             ref={ref}
-            placeholder="Enter a title for this card..."
+            placeholder="Введите название карточки..."
             errors={fieldErrors}
           />
           <input hidden id="listId" name="listId" value={listId} />
           <div className="flex items-center gap-x-1">
-            <FormSubmit>Add card</FormSubmit>
+            <FormSubmit>Добавить карточку</FormSubmit>
             <Button onClick={disableEditing} size={"sm"} variant={"ghost"}>
               <X className="h-5 w-5" />
             </Button>
@@ -92,7 +92,7 @@ export const CardForm = forwardRef<HTMLTextAreaElement, Props>(
           variant={"ghost"}
         >
           <Plus className="h-4 w-4 mr-2" />
-          Add a card
+          Добавить карточку
         </Button>
       </div>
     );

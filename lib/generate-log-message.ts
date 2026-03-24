@@ -2,15 +2,16 @@ import { ACTION } from "@/generated/prisma/enums";
 import { AuditLog } from "@/generated/prisma/client";
 export const generateLogMessage = (log: AuditLog) => {
   const { action, entityTitle, entityType } = log;
+  const translatedEntityType = entityType === "CARD" ? "карточку" : "список";
 
   switch (action) {
     case ACTION.CREATE:
-      return `created ${entityType.toLowerCase()} "${entityTitle}"`;
+      return `создал(а) ${translatedEntityType} "${entityTitle}"`;
     case ACTION.UPDATE:
-      return `updated ${entityType.toLowerCase()} "${entityTitle}"`;
+      return `обновил(а) ${translatedEntityType} "${entityTitle}"`;
     case ACTION.DELETE:
-      return `deleted ${entityType.toLowerCase()} "${entityTitle}"`;
+      return `удалил(а) ${translatedEntityType} "${entityTitle}"`;
     default:
-      return `unknown action ${entityType.toLowerCase()} "${entityTitle}"`;
+      return `выполнил(а) действие с "${entityTitle}"`;
   }
 };

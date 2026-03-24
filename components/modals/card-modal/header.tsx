@@ -28,7 +28,7 @@ export const Header = ({ data }: Props) => {
         queryKey: ["card-log", data.id],
       });
 
-      toast.success(`Renamed to "${data.title}`);
+      toast.success(`Переименовано в "${data.title}"`);
       setTitle(data.title);
     },
     onError: (error) => {
@@ -74,7 +74,7 @@ export const Header = ({ data }: Props) => {
           />
         </form>
         <p className="text-sm text-muted-foreground">
-          in list <span className="underline">{data.list.title}</span>
+          в списке <span className="underline">{data.list.title}</span>
         </p>
       </div>
     </div>

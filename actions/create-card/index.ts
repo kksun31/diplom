@@ -57,13 +57,13 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
     });
 
-    await createAuditLog({
+    void createAuditLog({
       entityId: card.id,
       entityTitle: card.title,
       entityType: ENTITY_TYPE.CARD,
       action: ACTION.CREATE,
     });
-  } catch (error) {
+  } catch {
     return {
       error: "Не удалось создать.",
     };
